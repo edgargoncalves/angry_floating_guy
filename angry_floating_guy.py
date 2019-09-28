@@ -83,6 +83,9 @@ class App:
         #     self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
         self.image = pygame.transform.scale(
             pygame.image.load("images/emoji.png"), (50, 50))
+        
+        self.enemy = pygame.transform.scale(
+            pygame.image.load("images/batwing.png"), (50, 50))
 
         # Background. Load image, and setup variables for scrolling it
         background = pygame.transform.scale(
@@ -233,6 +236,9 @@ class App:
         # now blit the hero on screen
         self.screen.blit(
             self.image, (self.position['hori'], self.position['vert']))
+        
+        self.screen.blit(
+            self.enemy, (self.position['hori']+100, self.position['vert']+100))
 
         # and update the screen (don't forget that!)
         pygame.display.flip()
