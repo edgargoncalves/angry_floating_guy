@@ -27,6 +27,7 @@ class Hero(DrawableItem):
                 if self.moving[way]:
                     velocity[propulsor_direction] += increment
 
+        hero_size = {'hori': self.size['w'], 'vert': self.size['h']}
         for direction in ['hori', 'vert']:
             # Inertia / resistive forces
             #    v = v0 + resistance
@@ -52,7 +53,9 @@ class Hero(DrawableItem):
             p_curr = p_ini + velocity[direction]
 
             # Ensure final position is within screen:
-            min_edge, max_edge = self.boundaries[direction]
+            min_edge = self.boundaries[direction][0]
+            max_edge = self.boundaries[direction][1] - \
+                hero_size[direction]
             p_curr = min(max(p_curr, min_edge), max_edge)
             position[direction] = p_curr
 

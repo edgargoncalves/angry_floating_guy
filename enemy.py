@@ -1,6 +1,7 @@
 """asd"""
 
-from random import choice, randrange
+# from random import choice, randrange
+from math import sin, cos
 from drawable_item import DrawableItem
 
 
@@ -10,11 +11,13 @@ class Enemy(DrawableItem):
     def __init__(self, hero, boundaries):
         self.hero = hero
         super(Enemy, self).__init__('batwing.png', boundaries)
+        self.angle = 0
 
     def move(self):
-        signal = {'hori': choice((-1, 1)),
-                  'vert': choice((-1, 1))}
+
+        self.angle = (self.angle+.1) % 360  # circle the hero
+
         self.position['hori'] = self.hero.position['hori'] + \
-            signal['hori']*50+signal['hori'] * randrange(0, 100)
+            cos(self.angle)*100
         self.position['vert'] = self.hero.position['vert'] + \
-            signal['vert']*50+signal['vert'] * randrange(0, 100)
+            sin(self.angle)*100
