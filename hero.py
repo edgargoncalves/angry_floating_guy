@@ -28,6 +28,8 @@ class Hero(DrawableItem):
                     velocity[propulsor_direction] += increment
 
         hero_size = {'hori': self.size['w'], 'vert': self.size['h']}
+        self.bounced = False
+
         for direction in ['hori', 'vert']:
             # Inertia / resistive forces
             #    v = v0 + resistance
@@ -60,7 +62,6 @@ class Hero(DrawableItem):
             position[direction] = p_curr
 
             # Make it bounce:
-            self.bounced = False
             if (p_ini > min_edge and p_curr == min_edge) or \
                     (p_ini < max_edge and p_curr == max_edge):
                 velocity[direction] *= -1
