@@ -32,8 +32,9 @@ class Background(DrawableItem):
 
         self.screen = pygame.display.set_mode(
             (self.size['w'], self.size['h']),
-            pygame.HWSURFACE | pygame.DOUBLEBUF | fullscreen_flag)
-        self.image.convert()
+            pygame.HWSURFACE  # | pygame.DOUBLEBUF
+            | fullscreen_flag)
+        self.screen.set_alpha(None)
 
     def load_from_file(self):
         self.image = pygame.transform.scale(
@@ -43,6 +44,7 @@ class Background(DrawableItem):
         self.size['w'], self.size['h'] = self.image.get_size()
         self.rect = self.image.get_rect()
         self.toggle_fullscreen()
+        self.image.convert()
 
         # x,y: initial top left corner.
         self.x = 0

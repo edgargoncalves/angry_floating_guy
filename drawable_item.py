@@ -30,7 +30,7 @@ class DrawableItem():
     def load_from_file(self):
         self.image = pygame.transform.scale(
             pygame.image.load("images/"+self.filename),
-            (self.size['w'], self.size['h']))
+            (self.size['w'], self.size['h'])).convert_alpha()
 
     def blit(self):
         self.screen.blit(
