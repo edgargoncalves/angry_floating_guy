@@ -25,10 +25,12 @@ class Background(DrawableItem):
         self.y1 = 0
         self.x_offset = 0
         self.fullscreen = False
+        self.fps = 25
 
     def toggle_fullscreen(self):
         fullscreen_flag = pygame.FULLSCREEN if self.fullscreen else 0
         self.fullscreen = not self.fullscreen
+        self.fps = 30 if self.fullscreen else 20
 
         self.screen = pygame.display.set_mode(
             (self.size['w'], self.size['h']),

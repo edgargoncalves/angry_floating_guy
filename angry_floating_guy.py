@@ -89,7 +89,7 @@ class App:
 
     def on_loop(self):
         """Handles the physics for the hero's movement."""
-        self.clock.tick(60)
+        self.clock.tick(self.background.fps)
         self.hero.world = self.current_world
 
         if self.hero.is_colliding_with(self.enemy):
