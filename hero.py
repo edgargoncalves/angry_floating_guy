@@ -11,6 +11,7 @@ class Hero(DrawableItem):
         self.world = world
         self.screen = None
         self.bounced = False
+        self.score = 0
 
     def move(self):
         acceleration = self.world.acceleration

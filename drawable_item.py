@@ -20,6 +20,9 @@ class DrawableItem():
                        pygame.K_RIGHT: False}
         self.boundaries = boundaries
         self.screen = None
+        self.rect = pygame.Rect(
+            self.position['hori'], self.position['vert'],
+            self.size['w'], self.size['w'])
 
     def scale(self, factor_h, factor_w):
         self.size['h'] *= factor_h
@@ -36,6 +39,12 @@ class DrawableItem():
         self.screen.blit(
             self.image, (self.position['hori'],
                          self.position['vert']))
+        self.rect = pygame.Rect(
+            self.position['hori'], self.position['vert'],
+            self.size['w'], self.size['w'])
+
+    def is_colliding_with(self, item):
+        return self.rect.colliderect(item.rect)
 
     def move(self):
         pass

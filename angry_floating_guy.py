@@ -1,5 +1,6 @@
 """Angry Floaring guy PiGame"""
 
+import pdb
 import pygame
 from pygame.locals import *
 from world import World
@@ -39,7 +40,7 @@ class App:
 
         self.background = Background(640, 400)
         self.hero = Hero(self.current_world, self.background.boundaries)
-        self.enemy = Enemy(self.hero, self.background.boundaries)
+        self.enemy = Enemy(self.hero, self.background)
 
     def on_init(self):
         """Loads up variables for the game to start"""
@@ -91,6 +92,9 @@ class App:
         self.clock.tick(60)
         self.hero.world = self.current_world
 
+        if self.hero.is_colliding_with(self.enemy):
+            self.hero.score += 1
+
         self.hero.move()
         if self.hero.bounced:
             self.effect.play()
@@ -100,6 +104,12 @@ class App:
     def on_render(self):
         # Render the background
         self.background.pan()
+
+        # Show the hero's score
+        smallfont = pygame.font.SysFont("comicsansms", 25)
+        text = smallfont.render(
+            "Score: "+str(self.hero.score), True, (255, 0, 0))
+        self.background.screen.blit(text, [0, 0])
 
         # now blit the hero on screen
         self.hero.blit()
